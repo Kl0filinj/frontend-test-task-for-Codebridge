@@ -31,23 +31,44 @@ const Article = () => {
         objectPosition="50% 20%"
       />
       <Box
-        py="8"
-        px="20"
         maxW="container.xl"
+        borderRadius="md"
         mx="auto"
-        borderRadius="lg"
         position="absolute"
         top="36"
         left="0"
         right="0"
         bg="white"
-        border="1px"
       >
-        <Box textAlign="center" border="1px">
-          <Heading mb="9">{articleInfo.title}</Heading>
-          <Text>{articleInfo.summary}</Text>
+        <Box
+          mb="8"
+          py="8"
+          px="20"
+          borderRadius="md"
+          textAlign="center"
+          border="1px solid #EAEAEA"
+          boxShadow="0px, 8px rgba(0, 0, 0, 0.05)"
+        >
+          <Heading
+            as="h2"
+            mb="9"
+            fontSize="2xl"
+            lineHeight="3xl"
+            fontWeight="normal"
+          >
+            {articleInfo.title}
+          </Heading>
+          <Text fontSize="lg" lineHeight="2xl">
+            {articleInfo.summary}
+          </Text>
         </Box>
-        <Link as={NavLink} to={backLink} mt="5">
+        <Link
+          as={NavLink}
+          to={backLink}
+          fontStyle="bold"
+          fontWeight="bold"
+          ml="20"
+        >
           Back to homepage <ArrowForwardIcon mx="2px" />
         </Link>
       </Box>

@@ -5,6 +5,9 @@ const dataState = {
   data: [],
   singleArticle: [],
   isLoading: false,
+  totalCountOfRequest: 50,
+  currentPage: 1,
+  perPage: 10,
   error: null,
 };
 
@@ -25,11 +28,17 @@ const normalizeState = state => {
 export const dataSlice = createSlice({
   name: 'auth',
   initialState: dataState,
+  reducers: {
+    setCurrentPage(state, action) {
+      state.currentPage = action.payload;
+    },
+  },
   extraReducers: {
     [fetchAlldata.pending]: handlePending,
     [fetchAlldata.fulfilled](state, action) {
       normalizeState(state);
-      state.data = action.payload;
+      state.data = action.payload.data;
+      state.totalCountOfRequest = action.payload.totalCount;
     },
     [fetchAlldata.rejected]: handleRejected,
 
@@ -42,4 +51,5 @@ export const dataSlice = createSlice({
   },
 });
 
+export const { setCurrentPage } = dataSlice.actions;
 export const dataReducer = dataSlice.reducer;

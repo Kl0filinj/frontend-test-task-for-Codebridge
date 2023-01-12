@@ -5,10 +5,19 @@ axios.defaults.baseURL = 'https://api.spaceflightnewsapi.net/v3';
 
 export const fetchAlldata = createAsyncThunk(
   'data/fetchAll',
-  async (_, thunkAPI) => {
+  async ({ perPage, currentPage, limit }, thunkAPI) => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+    //   Если у нас будет фильтр пустой то всё ок по кол-ву, если нет, то будем ставить кол-во с фильтра
     try {
-      const response = await axios.get('/articles');
-      return response.data;
+      const getTotalCount = await axios.get(`/articles?_limit=${limit}`);
+      const response = await axios.get(
+        `/articles?_start=${perPage * currentPage}`
+      );
+
+      return { data: response.data, totalCount: getTotalCount.data.length };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
