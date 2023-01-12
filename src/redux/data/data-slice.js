@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchAlldata } from './data-operations';
+import { fetchAlldata, fetchById } from './data-operations';
 
 const dataState = {
   data: [],
+  singleArticle: [],
   isLoading: false,
   error: null,
 };
@@ -31,6 +32,13 @@ export const dataSlice = createSlice({
       state.data = action.payload;
     },
     [fetchAlldata.rejected]: handleRejected,
+
+    [fetchById.pending]: handlePending,
+    [fetchById.fulfilled](state, action) {
+      normalizeState(state);
+      state.singleArticle = action.payload;
+    },
+    [fetchById.rejected]: handleRejected,
   },
 });
 

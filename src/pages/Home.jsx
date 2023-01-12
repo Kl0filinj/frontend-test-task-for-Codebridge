@@ -11,9 +11,11 @@ import { useDispatch } from 'react-redux';
 import ArticlesList from '../components/ArticlesList';
 import { useEffect } from 'react';
 import { fetchAlldata } from 'redux/data/data-operations';
+import { useLocation } from 'react-router-dom';
 
 const Home = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
 
   useEffect(() => {
     console.log('Fetch All');
@@ -36,7 +38,7 @@ const Home = () => {
         <Text>Results: 999999</Text>
         <Divider />
       </Box>
-      <ArticlesList />
+      <ArticlesList location={location} />
     </Box>
   );
 };

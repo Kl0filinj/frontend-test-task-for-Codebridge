@@ -7,11 +7,21 @@ export const fetchAlldata = createAsyncThunk(
   'data/fetchAll',
   async (_, thunkAPI) => {
     try {
-      console.log('fetch in operations');
-      const response = await axios.get('/blogs');
+      const response = await axios.get('/articles');
       return response.data;
     } catch (error) {
-      //   toast.error('Something goes wrong, try again');
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchById = createAsyncThunk(
+  'data/fetchById',
+  async (articleId, thunkAPI) => {
+    try {
+      const response = await axios.get(`/articles/${articleId}`);
+      return response.data;
+    } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
