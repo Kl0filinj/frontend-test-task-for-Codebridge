@@ -7,11 +7,21 @@ import {
   Divider,
 } from '@chakra-ui/react';
 import { Search2Icon } from '@chakra-ui/icons';
+import { useDispatch } from 'react-redux';
 import ArticlesList from '../components/ArticlesList';
+import { useEffect } from 'react';
+import { fetchAlldata } from 'redux/data/data-operations';
 
 const Home = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log('Fetch All');
+    dispatch(fetchAlldata());
+  }, [dispatch]);
+
   return (
-    <Box px="16" py="14" maxW="container.xl" mx="auto">
+    <Box py="14" maxW="container.xl" mx="auto">
       <Box mb="10">
         <Text>Filter by keywords</Text>
         <InputGroup>
