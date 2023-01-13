@@ -7,6 +7,7 @@ import {
   Heading,
   Image,
   SimpleGrid,
+  Highlight,
 } from '@chakra-ui/react';
 import { CalendarIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 import { useSelector } from 'react-redux';
@@ -14,7 +15,7 @@ import { selectData } from 'redux/data/data-selector';
 import { getDateMonth } from 'utils/utilsFunctions';
 import { NavLink } from 'react-router-dom';
 
-const ArticlesList = ({ location }) => {
+const ArticlesList = ({ location, query }) => {
   const data = useSelector(selectData);
 
   const trimedText = text => {
@@ -24,6 +25,7 @@ const ArticlesList = ({ location }) => {
     const slicedText = text.slice(0, 100) + ' ...';
     return slicedText;
   };
+
   return (
     <Box my="12">
       <SimpleGrid minChildWidth="sm" spacing="10">
@@ -53,9 +55,29 @@ const ArticlesList = ({ location }) => {
                   <Text ml="2.5">{getDateMonth(publishedAt)}</Text>
                 </Box>
                 <Heading size="md" mt="6">
-                  {title}
+                  <Highlight
+                    query={query}
+                    styles={{
+                      py: '1',
+                      px: '0.5',
+                      bg: 'yellow.300',
+                    }}
+                  >
+                    {title}
+                  </Highlight>
                 </Heading>
-                <Text mt="5">{trimedText(summary)}</Text>
+                <Text mt="5">
+                  <Highlight
+                    query={query}
+                    styles={{
+                      py: '1',
+                      px: '0.5',
+                      bg: 'yellow.300',
+                    }}
+                  >
+                    {trimedText(summary)}
+                  </Highlight>
+                </Text>
                 <CardFooter p="0">
                   <Text mt="5" _hover={{ textDecoration: 'underline' }}>
                     Read more <ArrowForwardIcon mx="2px" />

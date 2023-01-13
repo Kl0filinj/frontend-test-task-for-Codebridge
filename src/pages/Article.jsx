@@ -12,17 +12,16 @@ const Article = () => {
   const dispatch = useDispatch();
   const { articleId } = useParams();
   const backLink = location.state?.from ?? '/';
-  const articleInfo = useSelector(selectSingleArticleData);
+  const { imageUrl, title, summary } = useSelector(selectSingleArticleData);
 
   useEffect(() => {
-    console.log('Fetch ID');
     dispatch(fetchById(articleId));
   }, [dispatch, articleId]);
 
   return (
     <Box position="relative">
       <Image
-        src={articleInfo.imageUrl}
+        src={imageUrl}
         alt="Article preview image"
         fallbackSrc="https://via.placeholder.com/1450x250"
         width="100vw"
@@ -56,10 +55,10 @@ const Article = () => {
             lineHeight="3xl"
             fontWeight="normal"
           >
-            {articleInfo.title}
+            {title}
           </Heading>
           <Text fontSize="lg" lineHeight="2xl">
-            {articleInfo.summary}
+            {summary}
           </Text>
         </Box>
         <Link

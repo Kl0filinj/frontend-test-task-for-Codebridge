@@ -1,21 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  totalCountOfData,
   selectCurrentPage,
-  selectPerPage,
+  getPaginationArray,
 } from 'redux/data/data-selector';
 import { Box } from '@chakra-ui/react';
 import { setCurrentPage } from 'redux/data/data-slice';
-import { getPaginationArray } from 'utils/utilsFunctions';
 
 const Pagination = () => {
-  const pageTotalCount = useSelector(totalCountOfData);
   const currentPage = useSelector(selectCurrentPage);
-  const articlesPerPage = useSelector(selectPerPage);
 
   const dispatch = useDispatch();
 
-  const pageCount = getPaginationArray(pageTotalCount, articlesPerPage);
+  const pageCount = useSelector(getPaginationArray);
 
   return (
     <Box display="flex" justifyContent="center" mt="6" alignItems="center">

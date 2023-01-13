@@ -2,7 +2,7 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 axios.defaults.baseURL = 'https://api.spaceflightnewsapi.net/v3';
-const LIMIT = 50
+const LIMIT = 50;
 
 export const fetchAlldata = createAsyncThunk(
   'data/fetchAll',

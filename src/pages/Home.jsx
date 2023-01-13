@@ -22,22 +22,19 @@ import {
 import { Blocks } from 'react-loader-spinner';
 import { useState } from 'react';
 import { setCurrentPage } from 'redux/data/data-slice';
+import { useCallback } from 'react';
 
 const Home = () => {
   const [filter, setFilter] = useState('');
 
   const dispatch = useDispatch();
   const location = useLocation();
-  const dataLength = useSelector(totalCountOfData);
   const currentPage = useSelector(selectCurrentPage);
   const perPage = useSelector(selectPerPage);
   const limit = useSelector(totalCountOfData);
   const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
-    console.log('Fetch All');
-    console.log(perPage, currentPage);
-
     dispatch(
       fetchAlldata({
         perPage,
@@ -48,10 +45,13 @@ const Home = () => {
     );
   }, [dispatch, currentPage, perPage, limit, filter]);
 
-  const chageFilterHandler = evt => {
-    dispatch(setCurrentPage(1));
-    setFilter(evt.target.value);
-  };
+  const chageFilterHandler = useCallback(
+    evt => {
+      dispatch(setCurrentPage(1));
+      setFilter(evt.target.value);
+    },
+    [dispatch]
+  );
 
   return (
     <Box py="14" maxW="container.xl" mx="auto">
@@ -65,13 +65,13 @@ const Home = () => {
           <Input
             value={filter}
             type="tel"
-            placeholder="phone number"
+            placeholder="Enter your query..."
             onChange={chageFilterHandler}
           />
         </InputGroup>
       </Box>
       <Box>
-        <Text>Results: {dataLength}</Text>
+        <Text>Results: {limit}</Text>
         <Divider />
       </Box>
       {isLoading ? (
@@ -85,7 +85,7 @@ const Home = () => {
           />
         </Box>
       ) : (
-        <ArticlesList location={location} />
+        <ArticlesList location={location} query={filter} />
       )}
 
       <Pagination />
