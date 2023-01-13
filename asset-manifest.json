@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/frontend-test-task-for-Codebridge/static/css/main.7acaea2f.css",
-    "main.js": "/frontend-test-task-for-Codebridge/static/js/main.6b1b0588.js",
-    "static/js/496.0c9f707d.chunk.js": "/frontend-test-task-for-Codebridge/static/js/496.0c9f707d.chunk.js",
+    "main.js": "/frontend-test-task-for-Codebridge/static/js/main.4d40c569.js",
+    "static/js/496.ada279fd.chunk.js": "/frontend-test-task-for-Codebridge/static/js/496.ada279fd.chunk.js",
     "static/js/367.6bf02537.chunk.js": "/frontend-test-task-for-Codebridge/static/js/367.6bf02537.chunk.js",
     "static/js/129.96c7a0a7.chunk.js": "/frontend-test-task-for-Codebridge/static/js/129.96c7a0a7.chunk.js",
     "static/js/937.bcbe250b.chunk.js": "/frontend-test-task-for-Codebridge/static/js/937.bcbe250b.chunk.js",
     "index.html": "/frontend-test-task-for-Codebridge/index.html",
     "main.7acaea2f.css.map": "/frontend-test-task-for-Codebridge/static/css/main.7acaea2f.css.map",
-    "main.6b1b0588.js.map": "/frontend-test-task-for-Codebridge/static/js/main.6b1b0588.js.map",
-    "496.0c9f707d.chunk.js.map": "/frontend-test-task-for-Codebridge/static/js/496.0c9f707d.chunk.js.map",
+    "main.4d40c569.js.map": "/frontend-test-task-for-Codebridge/static/js/main.4d40c569.js.map",
+    "496.ada279fd.chunk.js.map": "/frontend-test-task-for-Codebridge/static/js/496.ada279fd.chunk.js.map",
     "367.6bf02537.chunk.js.map": "/frontend-test-task-for-Codebridge/static/js/367.6bf02537.chunk.js.map",
     "129.96c7a0a7.chunk.js.map": "/frontend-test-task-for-Codebridge/static/js/129.96c7a0a7.chunk.js.map",
     "937.bcbe250b.chunk.js.map": "/frontend-test-task-for-Codebridge/static/js/937.bcbe250b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7acaea2f.css",
-    "static/js/main.6b1b0588.js"
+    "static/js/main.4d40c569.js"
   ]
 }
