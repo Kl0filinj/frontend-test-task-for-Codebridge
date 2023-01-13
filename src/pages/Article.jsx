@@ -24,7 +24,7 @@ const Article = () => {
       <Image
         src={articleInfo.imageUrl}
         alt="Article preview image"
-        fallbackSrc="https://via.placeholder.com/150"
+        fallbackSrc="https://via.placeholder.com/1450x250"
         width="100vw"
         height="245px"
         objectFit="cover"

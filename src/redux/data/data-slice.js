@@ -5,7 +5,7 @@ const dataState = {
   data: [],
   singleArticle: [],
   isLoading: false,
-  totalCountOfRequest: 50,
+  totalCountOfRequest: 0,
   currentPage: 1,
   perPage: 10,
   error: null,

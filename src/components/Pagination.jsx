@@ -6,6 +6,7 @@ import {
 } from 'redux/data/data-selector';
 import { Box } from '@chakra-ui/react';
 import { setCurrentPage } from 'redux/data/data-slice';
+import { getPaginationArray } from 'utils/utilsFunctions';
 
 const Pagination = () => {
   const pageTotalCount = useSelector(totalCountOfData);
@@ -14,18 +15,15 @@ const Pagination = () => {
 
   const dispatch = useDispatch();
 
-  const pageCount = Array.from(
-    { length: pageTotalCount / articlesPerPage },
-    (_, i) => i + 1
-  );
-  console.log(pageCount);
+  const pageCount = getPaginationArray(pageTotalCount, articlesPerPage);
+
   return (
     <Box display="flex" justifyContent="center" mt="6" alignItems="center">
       {pageCount.map(i =>
-        i === currentPage ? (
+        i === currentPage && pageCount.length !== 1 ? (
           <Box
             onClick={() => {
-              dispatch(setCurrentPage(i));
+              dispatch(setCurrentPage(i - 1));
             }}
             as="button"
             borderRadius="md"

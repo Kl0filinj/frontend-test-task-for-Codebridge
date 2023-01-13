@@ -20,3 +20,10 @@ export function getDateMonth(date) {
 
   return `${month} ${day}th, ${year}`;
 }
+
+export function getPaginationArray(totalCount, perPage) {
+  if (totalCount <= perPage) {
+    return [1];
+  }
+  return Array.from({ length: totalCount / perPage }, (_, i) => i + 1);
+}

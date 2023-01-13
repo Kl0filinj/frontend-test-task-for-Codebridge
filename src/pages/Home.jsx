@@ -15,24 +15,43 @@ import { fetchAlldata } from 'redux/data/data-operations';
 import { useLocation } from 'react-router-dom';
 import {
   selectCurrentPage,
+  selectIsLoading,
   selectPerPage,
   totalCountOfData,
 } from 'redux/data/data-selector';
+import { Blocks } from 'react-loader-spinner';
+import { useState } from 'react';
+import { setCurrentPage } from 'redux/data/data-slice';
 
 const Home = () => {
+  const [filter, setFilter] = useState('');
+
   const dispatch = useDispatch();
   const location = useLocation();
   const dataLength = useSelector(totalCountOfData);
   const currentPage = useSelector(selectCurrentPage);
   const perPage = useSelector(selectPerPage);
   const limit = useSelector(totalCountOfData);
+  const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
     console.log('Fetch All');
     console.log(perPage, currentPage);
 
-    dispatch(fetchAlldata({ perPage, currentPage: currentPage - 1, limit }));
-  }, [dispatch, currentPage, perPage, limit]);
+    dispatch(
+      fetchAlldata({
+        perPage,
+        currentPage: currentPage - 1,
+        limit,
+        filter,
+      })
+    );
+  }, [dispatch, currentPage, perPage, limit, filter]);
+
+  const chageFilterHandler = evt => {
+    dispatch(setCurrentPage(1));
+    setFilter(evt.target.value);
+  };
 
   return (
     <Box py="14" maxW="container.xl" mx="auto">
@@ -43,14 +62,32 @@ const Home = () => {
             pointerEvents="none"
             children={<Search2Icon color="gray.300" />}
           />
-          <Input type="tel" placeholder="phone number" />
+          <Input
+            value={filter}
+            type="tel"
+            placeholder="phone number"
+            onChange={chageFilterHandler}
+          />
         </InputGroup>
       </Box>
       <Box>
         <Text>Results: {dataLength}</Text>
         <Divider />
       </Box>
-      <ArticlesList location={location} />
+      {isLoading ? (
+        <Box display="flex" justifyContent="center">
+          <Blocks
+            visible={true}
+            height="150"
+            width="150"
+            ariaLabel="blocks-loading"
+            wrapperClass="blocks-wrapper"
+          />
+        </Box>
+      ) : (
+        <ArticlesList location={location} />
+      )}
+
       <Pagination />
     </Box>
   );
