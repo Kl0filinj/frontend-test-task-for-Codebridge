@@ -9,8 +9,6 @@ import {
 import { useState } from 'react';
 import { setCurrentPage } from 'redux/data/data-slice';
 import { useCallback } from 'react';
-import debounce from 'lodash.debounce';
-import { useMemo } from 'react';
 
 const useFetchAllData = () => {
   const [filter, setFilter] = useState('');
@@ -30,9 +28,6 @@ const useFetchAllData = () => {
         filter,
       })
     );
-    // return () => {
-    //   chageFilterHandler.cancel();
-    // };
   }, [dispatch, currentPage, perPage, limit, filter]);
 
   const chageFilterHandler = useCallback(
