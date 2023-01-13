@@ -29,6 +29,11 @@ const ArticlesList = ({ location, query }) => {
   return (
     <Box my="12">
       <SimpleGrid minChildWidth="sm" spacing="10">
+        {data.length === 0 && (
+          <Heading as="h1" textAlign="center">
+            Nothing was found, try to change a query field{' '}
+          </Heading>
+        )}
         {data.map(({ id, title, imageUrl, summary, publishedAt }) => (
           <Card
             key={id}
