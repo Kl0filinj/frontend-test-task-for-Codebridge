@@ -33,7 +33,7 @@ const Home = () => {
           />
           <Input
             value={filter}
-            type="tel"
+            type="text"
             placeholder="Enter your query..."
             onChange={chageFilterHandler}
           />
