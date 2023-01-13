@@ -2,7 +2,7 @@ import { Box, Text, Heading, Image, Link } from '@chakra-ui/react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { selectSingleArticleData } from 'redux/data/data-selector';
+import { selectError, selectSingleArticleData } from 'redux/data/data-selector';
 import { fetchById } from 'redux/data/data-operations';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import { NavLink } from 'react-router-dom';
@@ -10,6 +10,7 @@ import { NavLink } from 'react-router-dom';
 const Article = () => {
   const location = useLocation();
   const dispatch = useDispatch();
+  const error = useSelector(selectError);
   const { articleId } = useParams();
   const backLink = location.state?.from ?? '/';
   const { imageUrl, title, summary } = useSelector(selectSingleArticleData);
@@ -48,18 +49,26 @@ const Article = () => {
           border="1px solid #EAEAEA"
           boxShadow="0px, 8px rgba(0, 0, 0, 0.05)"
         >
-          <Heading
-            as="h2"
-            mb="9"
-            fontSize="2xl"
-            lineHeight="3xl"
-            fontWeight="normal"
-          >
-            {title}
-          </Heading>
-          <Text fontSize="lg" lineHeight="2xl">
-            {summary}
-          </Text>
+          {!error ? (
+            <>
+              <Heading
+                as="h2"
+                mb="9"
+                fontSize="2xl"
+                lineHeight="3xl"
+                fontWeight="normal"
+              >
+                {title}
+              </Heading>
+              <Text fontSize="lg" lineHeight="2xl">
+                {summary}
+              </Text>
+            </>
+          ) : (
+            <Heading as="h1" textAlign="center">
+              Something goes wrong, try reload the page !
+            </Heading>
+          )}
         </Box>
         <Link
           as={NavLink}

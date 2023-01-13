@@ -11,7 +11,6 @@ export const fetchAlldata = createAsyncThunk(
       top: 0,
       behavior: 'smooth',
     });
-    //   Если у нас будет фильтр пустой то всё ок по кол-ву, если нет, то будем ставить кол-во с фильтра
     try {
       if (filter !== '') {
         const getTotalCount = await (
@@ -24,8 +23,6 @@ export const fetchAlldata = createAsyncThunk(
             perPage * currentPage
           }&title_contains=${filter}&summary_contains=${filter}`
         );
-        console.log('get from filter');
-        console.log(getTotalCount);
         return { data: response.data, totalCount: getTotalCount };
       }
 

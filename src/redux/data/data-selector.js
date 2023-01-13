@@ -4,6 +4,8 @@ export const selectData = state => state.data.data;
 
 export const selectIsLoading = state => state.data.isLoading;
 
+export const selectError = state => state.data.error;
+
 export const selectSingleArticleData = state => state.data.singleArticle;
 
 export const selectCurrentPage = state => state.data.currentPage;

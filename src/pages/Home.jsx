@@ -5,54 +5,23 @@ import {
   InputLeftElement,
   Input,
   Divider,
+  Heading,
 } from '@chakra-ui/react';
 import { Search2Icon } from '@chakra-ui/icons';
-import { useDispatch, useSelector } from 'react-redux';
 import ArticlesList from '../components/ArticlesList';
 import Pagination from 'components/Pagination';
-import { useEffect } from 'react';
-import { fetchAlldata } from 'redux/data/data-operations';
 import { useLocation } from 'react-router-dom';
-import {
-  selectCurrentPage,
-  selectIsLoading,
-  selectPerPage,
-  totalCountOfData,
-} from 'redux/data/data-selector';
+import { selectError, selectIsLoading } from 'redux/data/data-selector';
 import { Blocks } from 'react-loader-spinner';
-import { useState } from 'react';
-import { setCurrentPage } from 'redux/data/data-slice';
-import { useCallback } from 'react';
+import useFetchAllData from 'hooks/useFetchAllData';
+import { useSelector } from 'react-redux';
 
 const Home = () => {
-  const [filter, setFilter] = useState('');
-
-  const dispatch = useDispatch();
   const location = useLocation();
-  const currentPage = useSelector(selectCurrentPage);
-  const perPage = useSelector(selectPerPage);
-  const limit = useSelector(totalCountOfData);
   const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
 
-  useEffect(() => {
-    dispatch(
-      fetchAlldata({
-        perPage,
-        currentPage: currentPage - 1,
-        limit,
-        filter,
-      })
-    );
-  }, [dispatch, currentPage, perPage, limit, filter]);
-
-  const chageFilterHandler = useCallback(
-    evt => {
-      dispatch(setCurrentPage(1));
-      setFilter(evt.target.value);
-    },
-    [dispatch]
-  );
-
+  const { filter, chageFilterHandler, limit } = useFetchAllData();
   return (
     <Box py="14" maxW="container.xl" mx="auto">
       <Box mb="10">
@@ -85,7 +54,15 @@ const Home = () => {
           />
         </Box>
       ) : (
-        <ArticlesList location={location} query={filter} />
+        <>
+          {!error ? (
+            <ArticlesList location={location} query={filter} />
+          ) : (
+            <Heading as="h1" textAlign="center">
+              Something goes wrong, try reload the page !
+            </Heading>
+          )}
+        </>
       )}
 
       <Pagination />
